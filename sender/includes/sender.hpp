@@ -29,7 +29,8 @@ bool sendSensorDataToConsole(uint32_t numberOfReadings){
   vector<float> SOCValues = stateOfCharge->generateValues(numberOfReadings);
   vector<float> rateValues = rateOfCharge->generateValues(numberOfReadings);
   
-  if((temperatureValues.size() == numberOfReadings) && (SOCValues.size() == numberOfReadings) && 
+  if(!temperatureValues.empty() &&
+    (temperatureValues.size() == numberOfReadings) && (SOCValues.size() == numberOfReadings) && 
   (rateValues.size() == numberOfReadings))
   {
     cout << "Temperature readings: {" << toString(temperatureValues) << "}" << endl;

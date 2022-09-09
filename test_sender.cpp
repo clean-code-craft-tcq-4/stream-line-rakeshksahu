@@ -6,6 +6,6 @@
 using namespace std;
 
 TEST_CASE("test set 1 - check the output") {
-  REQUIRE(sendSensorDataToConsole(10));
-  REQUIRE(sendSensorDataToConsole(0));
+  CHECK(sendSensorDataToConsole(10));
+  CHECK_FALSE(sendSensorDataToConsole(0));
 }
