@@ -7,18 +7,16 @@
 
 using namespace std;
 
-void printDataToConsole(const vector<float>& data)
-{ 
-    if (!data.empty())
-    {
-      int32_t index = 0;
-      cout << setprecision(2);
-      for (index = 0; index < data.size()-1; ++index)
-      {
-        cout << data[index] << ", ";
-      }
-      cout << data[index] <<endl;
-    }
+string toString(const vector<float>& data)
+{
+  stringstream strValue;
+  if (!data.empty())
+  {
+    strValue.precision(2);
+    copy(data.begin(), data.end()-1, ostream_iterator<float>(strValue, ", "));
+    strValue<<*(data.end()-1);
+  }
+  return strValue.str();
 }
 
 bool sendSensorDataToConsole(uint32_t numberOfReadings){
@@ -34,9 +32,9 @@ bool sendSensorDataToConsole(uint32_t numberOfReadings){
   if((temperatureValues.size() == numberOfReadings) && (SOCValues.size() == numberOfReadings) && 
   (rateValues.size() == numberOfReadings))
   {
-    printDataToConsole(temperatureValues);
-    printDataToConsole(SOCValues);
-    printDataToConsole(rateValues);
+    cout << "Temperature readings: {" << toString(temperatureValues) << "}" << endl;
+    cout << "SOC readings: {" << toString(SOCValues) << "}" << endl;
+    cout << "Charge Rate readings: {" << toString(rateValues) << "}" << endl;
     isDataSentSuccessfully = true;
   }
   return isDataSentSuccessfully;
