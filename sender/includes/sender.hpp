@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <memory>
+#include <sstream>
+#include <iterator>
 #include "BMSParam.hpp"
 
 using namespace std;
