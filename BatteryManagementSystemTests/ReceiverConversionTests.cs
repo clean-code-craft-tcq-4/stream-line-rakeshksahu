@@ -33,46 +33,37 @@ namespace BatteryManagementSystemTests
         }
 
         [Fact]
-        public void SingleParameterConversionTest()
+        public void ValidParameterConversionTest()
         {
+            BatteryParameter expectedTemperatureReadings = new BatteryParameter()
+            {
+                Name = "Temperature readings",
+                Values = new double[] { 38, 18, 35, 36, 41, 8.9, 15, 35, 12, 25 }
+            };
+
+            BatteryParameter expectedSocReadings = new BatteryParameter()
+            {
+                Name = "SOC readings",
+                Values = new double[] { 49, 58, 42, 51, 77, 75, 58, 63, 28, 56 }
+            };
+
+            BatteryParameter expectedChargeRateReadings = new BatteryParameter()
+            {
+                Name = "Charge Rate readings",
+                Values = new double[] { 0.013, 0.19, 0.11, 0.64, 0.13, 0.32, 0.1, 0.087, 0.8, 0.17 }
+            };
+
             string senderOutput = ReceiverTestConstants.SingleParametersInput;
-
-            List<BatteryParameter> expectedOutput = new List<BatteryParameter>
-            {
-                new BatteryParameter()
-                {
-                    Name = "Temperature readings",
-                    Values = new double[]{ 38, 18, 35, 36, 41, 8.9, 15, 35, 12, 25 }
-                }
-            };
-
+            List<BatteryParameter> expectedOutput = new List<BatteryParameter> { expectedTemperatureReadings };
             TestParameterConversion(senderOutput, expectedOutput);
-        }
 
-        [Fact]
-        public void MultipleParametersConversionTest()
-        {
-            string senderOutput = ReceiverTestConstants.MultipleParametersInput;
-
-            List<BatteryParameter> expectedOutput = new List<BatteryParameter>
+            senderOutput = ReceiverTestConstants.MultipleParametersInput;
+            expectedOutput = new List<BatteryParameter>
             {
-                new BatteryParameter()
-                {
-                    Name = "Temperature readings",
-                    Values = new double[]{ 38, 18, 35, 36, 41, 8.9, 15, 35, 12, 25 }
-                },
-                new BatteryParameter()
-                {
-                    Name = "SOC readings",
-                    Values = new double[]{ 49, 58, 42, 51, 77, 75, 58, 63, 28, 56 }
-                },
-                new BatteryParameter()
-                {
-                    Name = "Charge Rate readings",
-                    Values = new double[]{ 0.013, 0.19, 0.11, 0.64, 0.13, 0.32, 0.1, 0.087, 0.8, 0.17 }
-                }
+                expectedTemperatureReadings,
+                expectedSocReadings,
+                expectedChargeRateReadings
             };
-
             TestParameterConversion(senderOutput, expectedOutput);
         }
 
